@@ -1,0 +1,23 @@
+<%%= page_header "Exibir <%= singular_table_name.capitalize %>" do %>
+  <%%= link_to_back <%= plural_table_name %>_path %>
+  <%%= link_to icon(:edit, 'Editar <%= singular_table_name.capitalize %>'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-sm btn-primary' %>
+<%% end %>
+
+<div class="card card-body card-text bg-light">
+
+    <h4 class="text-primary">
+      <%%= @<%= singular_table_name %>.<%= attributes_names.first || 'nome' %> %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+        <%- attributes.each do |attribute| -%>
+          <%%= card_item @<%= singular_table_name %>.<%= attribute.name %>, "<%= attribute.human_name.capitalize %>"  %>
+        <%- end -%>
+      </div>
+
+    </div>
+
+  </div>
+</div>

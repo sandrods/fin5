@@ -1,0 +1,43 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+
+ *= require select2
+ *= require select2-bootstrap
+
+ *= require flatpickr/dist/flatpickr
+ *= require flatpickr/dist/themes/material_blue
+
+ *= require bootstrap-toggle
+ *= require_tree .
+ *= require_self
+ */
+
+$blue: #337ab7;
+@import 'bootstrap/scss/bootstrap';
+
+$theme-color: #8eb96c;
+@import "theme";
+
+td.C { color: theme-color("success"); }
+td.D { color: theme-color("danger"); }
+
+.toggle-off {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.toggle.off {
+    border-color: rgba(0, 0, 0, .25);
+}
+
+.toggle-handle {
+    background-color: white;
+    border: thin rgba(0, 0, 0, .25) solid;
+}

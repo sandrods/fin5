@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h4 class="modal-title">Transferência</h4>
+</div>
+
+<%= simple_form_for @transf, remote: false do |f| %>
+
+  <div class="modal-body">
+
+    <div class="well vertical card-text mb-3">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Conta Origem</label>
+            <p class="form-control-static"> <%= @transf.reg_origem.conta.nome %> </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Conta Destino</label>
+            <p class="form-control-static"> <%= @transf.reg_destino.conta.nome %> </p>
+          </div>
+        </div>
+      </div>
+
+      <%= f.input :descricao %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data, as: :datetime %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency, input_html: { value: curr(@transf.valor) } %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <%= link_to icon(:trash, 'Apagar esta Transferência'),
+          @transf,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger' %>
+
+    <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">Fechar</button>
+    <%= f.submit "Salvar Transferência", class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

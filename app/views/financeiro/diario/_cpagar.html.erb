@@ -1,0 +1,13 @@
+<div class="card smaller">
+  <div class="card-header alert-danger">
+    <b>CONTAS A PAGAR</b>
+  </div>
+  <table class="table table-striped mb-0">
+    <tbody id="registros_conta_caixa">
+      <%= render partial: 'registros/pendente', collection: @diario.a_pagar, as: :registro %>
+    </tbody>
+  </table>
+  <div class="card-footer text-right">
+    <small>Total</small> &nbsp; <%= curr @diario.a_pagar_total %>
+  </div>
+</div>

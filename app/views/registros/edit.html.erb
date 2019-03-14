@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    Editar Registro
+    <%= label_cd(@registro.cd) %>
+  </h4>
+</div>
+
+<%= simple_form_for @registro, remote: false do |f| %>
+  <div class="modal-body">
+
+    <div class="well vertical card-text mb-3">
+
+      <%= f.input :descricao, label: 'Descrição' %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency, input_html: { value: curr(@registro.valor) } %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <%= f.input :cd, as: :cd, label: false, input_html: { checked: @registro.receita? } %>
+      </div>
+    </div>
+
+    <div class="well vertical card-text mb-3">
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.association :conta, label_method: :nome %>
+        </div>
+        <div class="col-md-6">
+          <%= f.association :categoria, collection: Categoria.por_cd(@registro.cd).to_select %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <%= f.input :pago, as: :pago, label: false %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <%= link_to icon(:trash, 'Apagar Registro'),
+          @registro,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger' %>
+
+    <%= link_to icon(:sync, "Duplicar Registro"),
+                duplicate_registro_path(@registro),
+                method: 'POST',
+                data: { confirm: "Confirma Duplicação?" },
+                class: 'btn btn-sm text-primary' %>
+
+    <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">Fechar</button>
+    <%= f.submit "Salvar Registro", class: 'btn btn-primary' %>
+  </div>
+<% end %>

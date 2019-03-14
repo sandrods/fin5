@@ -1,0 +1,52 @@
+.nav-tabs.contrast {
+    border-bottom: 4px solid #428bca;
+    margin-bottom: 20px;
+    li > a.active, li > a.active:focus {
+        background-color: #428bca;
+        color: #fff;
+        border-color: #428bca;
+    }
+    li > a:hover {
+        border-color: #428bca;
+    }
+
+  &.danger {
+    border-bottom-color: #f77777;
+    li > a.active, li > a.active:focus {
+      background-color: #f77777;
+      border-color: #f77777;
+    }
+  }
+
+  &.success {
+    border-bottom-color: #41aa58;
+    li > a.active, li > a.active:focus {
+      background-color: #41aa58;
+      border-color: #41aa58;
+    }
+  }
+
+  &.secondary {
+    border-bottom-color: #bbb;
+    li > a.active, li > a.active:focus {
+      background-color: #bbb;
+      border-color: #bbb;
+    }
+  }
+
+  li.success > a:not(.active):hover {
+    border-color: #41aa58;
+    background-color: #EBFFEB;
+  }
+
+  li.danger > a:not(.active):hover {
+    border-color: #f77777;
+    background-color: #f7e1e1;
+  }
+
+  li.secondary > a:not(.active):hover {
+    border-color: #ccc;
+    background-color: #f8f8f5;
+  }
+
+}

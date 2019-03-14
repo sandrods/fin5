@@ -1,0 +1,51 @@
+<%= page_header "Pesquisa de Lançamentos" %>
+
+<div class="search right mb-4">
+
+  <%= simple_form_for @search,
+                      url: registros_path,
+                      method: 'GET',
+                      html: { class: 'form-inline' } do |f| %>
+
+    <input type="hidden" name="all" value="true" />
+
+    <%= f.input :descricao_cont, label: "Descrição" %>
+    <%= f.input :data_gteq, collection: combo_periodo, label: "Período", input_html: { class: 'custom_select' } %>
+    <%= f.input :conta_id_eq, collection: Conta.to_select, label: "Conta", input_html: { class: 'custom_select' } %>
+    <%= f.input :categoria_id_eq, collection: Categoria.to_select, label: "Categoria", input_html: { class: 'custom_select' } %>
+
+    <%= button_tag icon(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+    <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="80px">Data</th>
+      <th>Conta</th>
+      <th>Descrição</th>
+      <th>Categoria</th>
+      <th class="right">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @search.result.each do |reg| %>
+      <tr>
+        <td><small><%= reg.data %></small></td>
+        <td><%= reg.conta.nome %></td>
+        <td><%= link_to reg.descricao, edit_registro_path(reg), data: { behavior: 'load-modal'} %></td>
+        <td><small><%= reg.categoria&.nome %></small></td>
+        <td class='text-right <%= reg.cd %>' ><%= curr(reg.valor_cd) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td class='text-right' colspan="4">Total</td>
+      <td class='text-right'><%= curr(@search.result.all.sum(&:valor_cd)) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+<%= index_count @search.result.count, "lançamentos encontrados" %>

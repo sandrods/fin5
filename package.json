@@ -1,0 +1,21 @@
+{
+  "name": "fin5",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "@rails/webpacker": "3.5",
+    "bootstrap": "~4.3.0",
+    "coffeescript": "1.12.7",
+    "flatpickr": "^4.5.2",
+    "jquery": "^3.3.1",
+    "jquery.maskedinput": "^1.4.1",
+    "popper.js": "^1.14.7",
+    "resolve-url-loader": "^3.0.1",
+    "stimulus": "^1.1.0",
+    "yarn": "^1.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "3.1.11"
+  }
+}

@@ -1,0 +1,29 @@
+<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
+
+  <div class="card card-body card-text bg-light">
+
+    <div class="row">
+      <div class="col-md-6">
+      <%- attributes.each do |attribute| -%>
+        <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>, label: '<%= attribute.human_name.capitalize %>' %>
+      <%- end -%>
+
+      <%- if attributes.empty? -%>
+        <%%= f.input :nome, label: 'Nome' %>
+      <%- end -%>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-actions">
+    <%%= f.button :submit, 'Salvar <%= singular_table_name.capitalize %>', class: 'btn btn-primary' %>
+
+    <%%= link_to icon(:trash, 'Apagar este <%= singular_table_name.capitalize %>'),
+          @<%= singular_table_name %>,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @<%= singular_table_name %>.new_record? %>
+  </div>
+
+<%% end %>

@@ -1,0 +1,83 @@
+<%= page_header "Financeiro Anual" %>
+
+<div class="well well-row center mb-4 h2">
+  <%= link_to icon(:arrow_left), financeiro_anual_path(ano: @anual.calendar.last_year), class: "mr-3" %>
+  <%= @anual.calendar.year %>
+  <%= link_to icon(:arrow_right), financeiro_anual_path(ano: @anual.calendar.next_year), class: "ml-3" %>
+</div>
+
+<%= line_chart @anual.saldos,
+                  label: "Saldo",
+                  library: {
+                    plotOptions: {
+                      series: {
+                        dataLabels: { enabled: true }
+                      }
+                    }
+                  }
+ %>
+<hr>
+<h4 class="mt-5 mb-3">Receitas e Despesas - Totais do Ano </h4>
+
+<div class="well stats mb-4 px-4">
+  <div class="row">
+    <div class="col-3 text-muted">
+      <h1> <%= number_to_currency @anual.saldo_inicial %></h1>
+      <small>SALDO ANTERIOR</small>
+    </div>
+    <div class="col-3 text-danger">
+      <h1> <%= number_to_currency @anual.total_despesas %></h1>
+      <small>TOTAL DE DESPESAS</small>
+    </div>
+    <div class="col-3 text-success">
+      <h1> <%= number_to_currency @anual.total_receitas %></h1>
+      <small>TOTAL DE RECEITAS</small>
+    </div>
+    <div class="col-3 text-primary">
+      <h1> <%= number_to_currency @anual.saldo_final %></h1>
+      <small>SALDO FINAL</small>
+    </div>
+  </div>
+</div>
+
+ <div class="row">
+
+   <div class="col-sm-12 col-md-6">
+
+     <div class="card">
+       <div class="card-header alert-danger">
+         <b>DESPESAS</b>
+       </div>
+       <table class="table table-striped mb-0">
+         <tbody>
+           <% @anual.despesas.each do |cat, valor| %>
+           <tr>
+             <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
+             <td class='text-right' ><%= number_to_currency(valor) %></td>
+           </tr>
+           <% end %>
+         </tbody>
+       </table>
+     </div>
+
+   </div>
+
+   <div class="col-sm-12 col-md-6">
+
+     <div class="card">
+       <div class="card-header alert-success">
+         <b>RECEITAS</b>
+       </div>
+       <table class="table table-striped mb-0">
+         <tbody>
+           <% @anual.receitas.each do |cat, valor| %>
+           <tr>
+             <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
+             <td class='text-right' ><%= number_to_currency(valor) %></td>
+           </tr>
+           <% end %>
+         </tbody>
+       </table>
+     </div>
+
+   </div>

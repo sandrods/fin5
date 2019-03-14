@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title">Transferência</h4>
+</div>
+
+<%= simple_form_for @transf, remote: false do |f| %>
+
+  <div class="modal-body">
+
+    <div class="well vertical card-text mb-3">
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :conta_origem, collection: Conta.to_select, label: 'Conta Origem' %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :conta_destino, collection: Conta.to_select, label: 'Conta Destino' %>
+        </div>
+      </div>
+
+      <%= f.input :descricao %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data, as: :datetime %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+    <%= f.submit "Salvar Transferência", class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

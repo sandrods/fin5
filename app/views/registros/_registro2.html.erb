@@ -1,0 +1,8 @@
+<tr>
+  <td>
+    <%= link_to(registro.data, edit_registro_path(registro), data: { behavior: 'load-modal'} ) %>
+    <br/>
+    <%= registro.descricao %>
+  </td>
+  <td class='text-right <%= registro.cd %>' ><%= curr(registro.valor_cd) %></td>
+</tr>

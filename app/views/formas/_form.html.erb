@@ -1,0 +1,21 @@
+<%= simple_form_for(@forma) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :nome, label: 'Nome' %>
+      <%= f.association :conta, label: 'Conta Preferencial', collection: Conta.all, label_method: :nome %>
+
+    </div>
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Forma', class: 'btn btn-primary' %>
+
+    <%= link_to icon(:trash, 'Apagar este Forma'),
+          @forma,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @forma.new_record? %>
+  </div>
+
+<% end %>

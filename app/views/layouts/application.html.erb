@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fin5</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag    'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag    'fonts', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800" rel="stylesheet">
+  </head>
+
+  <%= content_tag :body,
+                  class: "#{controller_name} #{action_name} bg",
+                  data: { action: "#{controller_name}##{action_name}" } do %>
+
+
+    <%= render partial: 'layouts/navbar' %>
+
+    <div class="container" id="content">
+      <%= yield %>
+      <%= commit_sha %>
+    </div>
+
+    <%= render partial: 'layouts/modal' %>
+
+  <% end %>
+
+</html>

@@ -1,0 +1,23 @@
+<%= page_header "Formas de Pagamento" do %>
+  <%= link_to(icon(:plus, 'Nova Forma'), new_forma_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Conta Preferencial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @formas.each do |forma| %>
+      <tr>
+        <td><%= link_to forma.nome, edit_forma_path(forma) %></td>
+        <td><%= forma.conta&.nome %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<%= index_count(@formas.count, 'formas encontrados') %>

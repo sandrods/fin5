@@ -1,0 +1,54 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">
+    Incluir Registro
+    <%= label_cd(@registro.cd) %>
+  </h4>
+</div>
+
+<%= simple_form_for @registro, remote: false do |f| %>
+
+  <%= f.input :cd, as: :hidden %>
+  <div class="modal-body">
+
+    <div class="well vertical card-text mb-3">
+
+      <%= f.input :descricao, label: 'Descrição' %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="well vertical card-text mb-3">
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.association :conta, label_method: :nome %>
+        </div>
+        <div class="col-md-6">
+          <%= f.association :categoria, collection: Categoria.por_cd(@registro.cd).to_select %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <%= f.input :pago, as: :pago, label: false %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+    <%= f.submit "Salvar Registro", class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<%= page_header "Contas" do %>
+  <%= link_to(icon(:plus, 'Nova Conta'), new_conta_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contas.each do |conta| %>
+      <tr>
+        <td><%= link_to conta.nome, edit_conta_path(conta) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<%= index_count(@contas.count, 'contas encontradas') %>

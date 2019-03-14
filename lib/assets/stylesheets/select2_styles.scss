@@ -1,0 +1,15 @@
+.select2-sub {
+  display: table-cell;
+  color: #888;
+  .select2-results__option--highlighted & {
+    color: #CCC;
+  }
+}
+
+.select2-container--bootstrap {
+  .select2-selection, .select2-search--dropdown .select2-search__field {
+    font-family: inherit;
+  }
+}
+
+@import "select2-bootstrap-theme";

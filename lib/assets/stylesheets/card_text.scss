@@ -1,0 +1,163 @@
+.card-header.with_caption {
+  font-weight: bold;
+  color: darken($theme-color, 5%);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  small {
+    margin-top: .2rem;
+    display: block;
+    color: #777;
+    font-size: 75%;
+  }
+}
+
+.card-header.title {
+  font-weight: bold;
+  color: #777;
+  text-transform: uppercase;
+  .btn-group {
+    text-transform: none;
+  }
+  // font-size: 1.1rem;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between;
+  margin: 0;
+
+
+  a.btn { text-transform: none; }
+
+  small {
+    margin-top: 0.0rem;
+    display: block;
+    color: #777;
+    font-size: 75%;
+  }
+
+  .badge {
+    padding: 0.30em 0.4em;
+    font-size: 90%;
+    margin-left: 0.5rem
+  }
+}
+
+.card-header {
+  h4 {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    // line-height: 1;
+
+    display: flex !important;
+    align-items: center !important;
+    margin: 0;
+  }
+}
+
+.card-text {
+
+  label {
+    text-transform: uppercase;;
+    font-size: 80%;
+    font-weight: 400;
+    color: #337ABC;
+    margin-bottom: 0px;
+  }
+
+  p {
+    margin-top: -2px;
+    margin-bottom: 0.75rem;
+  }
+
+  a.action {
+    margin: 5px -3px -6px 0;
+    font-size: 80%;
+    float: right;
+    color: #777;
+    &.left {
+      float: left;
+      margin: 5px 0 -3px -3px;
+    }
+    &:hover {
+      color: theme-color("danger");
+    }
+    &.danger {
+      color: theme-color("danger");
+      &:hover { color: theme-color("primary"); }
+    }
+  }
+
+  h4 {
+    padding-bottom: 3px;
+    color: #3F94B6;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    font-size: 1.2rem;
+  }
+
+  .row.bg {
+    background-color: #faf9f6;
+    margin-bottom: 0.7rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+}
+
+.well {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f5f5;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  &.center {
+    justify-content: center;
+  }
+  &.well-row {
+    flex-direction: row;
+  }
+
+  position: relative;
+
+  h4 {
+    font-weight: 600;
+    color: #3F94B6;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    text-align: left;
+    margin: 0;
+  }
+}
+
+.title {
+  font-weight: 600;
+  color: #3F94B6;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  text-align: left;
+  margin-bottom: 0.8rem;
+}
+
+.card-horizontal {
+  @include make-row();
+  label {
+    @include make-col-ready();
+    @include make-col(2);
+    font-weight: 700;
+    text-align: right;
+    padding: 0 0.2rem 0 0;
+    color: #999;
+    font-size: 85%
+  }
+  p {
+    @include make-col-ready();
+    @include make-col(10);
+    margin-bottom: 0.5rem;
+    &:last-child { margin-bottom: 0 }
+  }
+}

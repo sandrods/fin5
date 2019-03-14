@@ -1,0 +1,13 @@
+<tr>
+  <td class="date"><%= link_to registro.data, edit_registro_path(registro), data: { behavior: 'load-modal'} %></td>
+  <% if registro.transferencia? %>
+  <td class="text-muted">
+    <%= registro.descricao %>
+    <small class="sub1"><%= icon(:exchange_alt, registro.transferencia&.conta&.nome) %></small>
+  <% else %>
+  <td class="text-muted">
+    <%= registro.descricao %>
+  <% end %>
+  </td>
+  <td class='text-right <%= registro.cd %>' ><%= curr(registro.valor_cd) %></td>
+</tr>

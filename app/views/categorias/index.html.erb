@@ -1,0 +1,38 @@
+<%= page_header "Categorias" do %>
+  <%= link_to(icon(:plus, 'Nova Categoria'), new_categoria_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<div class="search right mb-4">
+
+  <%= simple_form_for @search,
+                      url: categorias_path,
+                      method: 'GET',
+                      html: { class: 'form-inline' } do |f| %>
+
+    <%= f.input :nome_cont, label: "Nome" %>
+
+    <%= button_tag icon(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+    <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categorias.each do |categoria| %>
+      <tr>
+        <td><%= link_to categoria.nome, edit_categoria_path(categoria) %></td>
+        <td><%= label_cd(categoria.cd) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<%= index_count(@categorias.count, 'categorias encontrados') %>

@@ -1,0 +1,60 @@
+pt-BR:
+  faker:
+    address:
+      city_prefix: [Nova, Novo, Vila]
+      city_suffix: [do Oeste, de Nossa Senhora, do Norte, do Norte, do Sul, do Sul, Velha]
+      country: ["Albânia", "Alemanha", "Algéria", "Afeganistão", "África do Sul", "Andorra", "Angola", "Anguilla", "Antilhas Holandesas", "Antígua e Barbuda", "Argentina", "Armênia", "Arquipélago de Chagos", "Aruba", "Arábia Saudita", "Austrália", "Áustria", "Azerbaijão", "Bahamas", "Bahrein", "Bangladesh", "Barbados", "Belgrado", "Belize", "Benin", "Bermuda", "Bolívia", "Botswana", "Bouvetoia", "Brasil", "Brunei", "Bulgária", "Burkina Faso", "Burundi", "Butão", "Bélgica", "Bôsnia", "Cabo Verde", "Camarões", "Cambodja", "Canadá", "Catar", "Cazaquistão", "Chade", "Chile", "China", "Chipre", "Colômbia", "Comoros", "Congo", "Coreia do Norte", "Coreia do Sul", "Costa do Marfim", "Costa Rica", "Croácia", "Cuba", "Dinamarca", "Djibouti", "Dominica", "Egito", "El Salvador", "Emirados Árabes Unidos", "Equador", "Eritrea", "Eslováquia", "Eslovênia", "Espanha", "Estados Unidos da América", "Estados Unidos das Ilhas Virgens", "Estônia", "Etiópia", "Fiji", "Filipinas", "Finlândia", "França", "Gabão", "Gana", "Georgia", "Gibraltar", "Granada", "Groenlândia", "Grécia", "Guadalupe", "Guan", "Guatemala", "Guernsey", "Guiana", "Guiné Equatorial", "Guiné Francesa", "Guiné", "Guiné-Bissau", "Gâmbia", "Haiti", "Holanda", "Honduras", "Hong Kong", "Hungria", "Ilha de Man", "Ilha Heard e Ilhas McDonald", "Ilha Norfolk", "Ilhas Caiman", "Ilhas Cocos", "Ilhas Cook", "Ilhas Faroe", "Ilhas Geórgia do Sul e Sandwich do Sul", "Ilhas Marshall", "Ilhas Natal", "Ilhas Salomão", "Ilhas Turcas e Caicos", "Ilhas Virgens", "Índia", "Indonésia", "Iraque", "Irlanda", "Irã", "Islândia", "Israel", "Itália", "Jamaica", "Japão", "Jersey", "Jordânia", "Kiribati", "Kuwait", "Kyrgyz Republic", "Lesotho", "Letônia", "Libéria", "Liechtenstein", "Lituânia", "Luxemburgo", "Líbano", "Líbia", "Macao", "Macedônia", "Madagascar", "Malawi", "Maldivas", "Mali", "Malta", "Malvinas", "Malásia", "Marrocos", "Martinica", "Mauritius", "Mauritânia", "Mayotte", "Micronésia", "Moldova", "Mongólia", "Montenegro", "Montserrat", "Moçambique", "Myanmar", "México", "Mônaco", "Namibia", "Nauru", "Nepal", "Nicarágua", "Nigéria", "Niue", "Northern Mariana Islands", "Noruega", "Nova Caledonia", "Nova Zelândia", "Oman", "Palau", "Panamá", "Papua-Nova Guiné", "Paquistão", "Paraguai", "Peru", "Polinésia Francesa", "Polônia", "Portugal", "Puerto Rico", "Quênia", "Reino Unido", "República Centro-Africana", "República Democrática de Lao People", "República Dominicana", "República Tcheca", "Romênia", "Ruanda", "Rússia", "Sahara", "Saint Martin", "Saint-Pierre e Miquelon", "Samoa", "San Marino", "Santa Helena", "Santa Lúcia", "Sao Tomé e Príncipe", "Senegal", "Serra Leoa", "Seychelles", "Singapura", "Somália", "Sri Lanka", "Suazilândia", "Sudão", "Suriname", "Suécia", "Suíça", "Svalbard e Jan Mayen", "São Bartolomeu", "São Vicente e Granadinas", "Sérvia", "Síria", "Tailândia", "Taiwan", "Tajiquistão", "Tanzânia", "Território da Palestina", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad e Tobago", "Tunísia", "Turcomenistão", "Turquia", "Tuvalu", "Ucrânia", "Uganda", "Uruguai", "Uzbequistão", "Vanuatu", "Vaticano", "Venezuela", "Vietnã", "Wallis e Futuna", "Yemen", "Zimbábue", "Zâmbia"]
+      building_number: ["####", "###", "##"]
+      street_prefix: ["Rua", "Rua", "Rua", "Av.", "Av.", "Travessa", "Alameda", "Marginal", "Rodovia"]
+      secondary_address: ["- Apto. #0#", "- Casa #", "- Apto #0#", "- Quadra ##", "- Apto. ##"]
+
+      city:
+        - "#{city_prefix} #{Name.first_name} #{city_suffix}"
+        - "#{city_prefix} #{Name.first_name}"
+        - "#{Name.first_name} #{city_suffix}"
+        - "#{Name.last_name} #{city_suffix}"
+        - "#{Name.last_name} #{Name.last_name}"
+        - "#{Name.last_name} #{Name.last_name} #{city_suffix}"
+
+      street_name:
+        - "#{street_prefix} #{Name.name}"
+        - "#{street_prefix} #{Name.last_name} #{Name.last_name}"
+        - "#{street_prefix} #{Name.last_name} #{Name.last_name}"
+      street_address:
+        - "#{street_name}, #{building_number}"
+
+      postcode: ["#####", "#####-###"]
+      state: ["Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"]
+      state_abbr: [AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP]
+      default_country: [Brasil]
+
+    company:
+      suffix: ["S.A.", "LTDA", "e Associados", "S/C"]
+      name:
+        - "#{Name.last_name} #{suffix}"
+        - "#{Name.last_name}-#{Name.last_name}"
+        - "#{Name.last_name}, #{Name.last_name} e #{Name.last_name}"
+
+    internet:
+      free_email: [gmail.com, yahoo.com, hotmail.com, live.com, bol.com.br]
+      domain_suffix: [br, com, biz, info, name, net, org]
+
+    name:
+      male: [Alessandro, Alexandre, Antônio, Breno, Carlos, César, Cláudio, Danilo, Daniel, Décio, Eduardo, Elísio, Fábio, Fabrício, Félix, Feliciano, Frederico, Fabiano, Gustavo, Guilherme, Gilberto, Heitor, Hélio, Hugo, Ígor, João, Júlio César, Júlio, Kléber, Lucas, Lúcio, Luiz, Luiz Roberto, Luis Augusto, Luiz Paulo, Marcos, Marco Antônio, Meire, Marcelo, Norberto, Nataniel, Paulo, Paula, Pablo, Pedro, Raul, Rafael, Ricardo, Roberto, Sandro, Silas, Salvador, Sirineu, Vicente, Víctor, Washington]
+      first_name: [Alessandra, Aline, Ana Lúcia, Ana Maria, Bruna, Carla, Célia, Cecília, Claudia, Dalila, Dilma, Eduarda, Esther, Fabrícia, Felícia, Isabel, Isabela, Joana, Júlia, Janaína, Karla, Lorena, Lorraine, Larissa, Marcela, Margarida, Márcia, Marli, Morgana, Maria, Maria Fernanda, Maria Eduarda, Maria Luiza, Natália, Núbia, Ofélia, Paula, Rafaela, Roberta, Sílvia, Sandra, Sílvia, Suélen, Sara, Talita, Themis, Vitória, Alessandro, Alexandre, Antônio, Breno, Carlos, César, Cláudio, Danilo, Daniel, Décio, Eduardo, Elísio, Fábio, Fabrício, Félix, Feliciano, Frederico, Fabiano, Gustavo, Guilherme, Gilberto, Heitor, Hélio, Hugo, Ígor, João, Júlio César, Júlio, Kléber, Lucas, Lúcio, Luiz, Luiz Roberto, Luis Augusto, Luiz Paulo, Marcos, Marco Antônio, Meire, Marcelo, Norberto, Nataniel, Paulo, Paula, Pablo, Pedro, Raul, Rafael, Ricardo, Roberto, Sandro, Silas, Salvador, Sirineu, Vicente, Víctor, Washington]
+      last_name: [Albuquerque, Alves, Amaral, Avila, Barbosa, Barcelos, Barreto, Barros, de Barros, Batista, Bicca, Bittencourt, Braga, Brandão, Brum, Cardoso, Carvalho, Coelho, Costa, Coutinho, da Luz, da Rocha, da Silva, de Campos, Dhiel, Duarte, Farias, Ferretto, Fortes, Franco, Garcia, Godoy, Gomes, Heck, Kern, Khun, Klein, Krieger, Lautert, Leal, Lopes, Macedo, Maciel, Martins, Melo, Menegaz, Moraes, Moreira, Nascimento, do Nascimento, Nogueira, Oliveira, de Oliveira, Padilha, Paiva, Pascoal, Pereira, Piccoli, Pillar, Prudente, Quadros, Rech, Reis, dos Reis, Ribeiro, Rodrigues, Santos, dos Santos, Saraiva, Schirmer, Schuck, Silva, Souza, Stumpf, Teixeira, Weber, Weiss, Xavier, Zanini]
+      prefix: ["Sr.", "Sra.", "Srta.", "Dr."]
+      suffix: ["Jr.", "Neto", "Filho"]
+      name:
+        - "#{first_name} #{last_name} #{last_name}"
+        - "#{first_name} #{last_name} #{last_name}"
+        - "#{first_name} #{last_name} #{last_name}"
+        - "#{first_name} #{last_name}"
+        - "#{first_name} #{last_name}"
+        - "#{male} #{last_name} #{suffix}"
+
+    phone_number:
+      formats: ["(#1) ####-####", "+55 (#1) ####-####", "(#1) 9####-####"]
+
+    hacker:
+      abbreviation: [TCP,HTTP,SDD,RAM,GB,CSS,SSL,AGP,SQL,FTP,PCI,AI,ADP,RSS,XML,EXE,COM,HDD,THX,SMTP,SMS,USB,PNG,SAS,IB,SCSI,JSON,XSS,JBOD, PaaS, IaaS, SOA, BYOD, OAuth]

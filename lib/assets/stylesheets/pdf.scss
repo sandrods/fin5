@@ -1,0 +1,18 @@
+.pdf-link {
+  margin-top: 15px;
+  padding: 10px 15px 10px 70px;
+  height: 68px;
+  display: inline-block;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: #f4f4f4 asset-url('pdf.png') 10px 10px no-repeat;
+  p { color: #337ab7; margin: 0 }
+  small { color: #888; display: block; }
+
+  &:hover {
+    text-decoration: none;
+    background-color: #e9e9e9;
+    p { color: #24649c; }
+    small { color: #555; }
+  }
+}

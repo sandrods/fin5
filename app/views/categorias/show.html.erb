@@ -1,0 +1,29 @@
+<%= page_header "Exibir Categoria" do %>
+  <%= link_to_back categorias_path %>
+  <%= link_to icon(:edit, 'Editar Categoria'), edit_categoria_path(@categoria), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @categoria.nome %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+            <dt>Nome</dt>
+            <dd><%= @categoria.nome %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

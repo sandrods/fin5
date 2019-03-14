@@ -1,0 +1,71 @@
+<%= page_header "Diário Financeiro" do %>
+
+  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
+
+<% end %>
+
+<%= render 'financeiro/diario/nav' %>
+
+<div class="row">
+
+  <% if @diario.calendar.future? %>
+    <%= render partial: 'financeiro/diario/conta_futuro', collection: @diario.contas, as: :conta %>
+  <% else %>
+    <%= render partial: 'financeiro/diario/conta', collection: @diario.contas %>
+  <% end %>
+
+</div>
+
+<div class="well well-row mb-4">
+  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
+
+  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
+</div>
+
+<% unless @diario.calendar.future? %>
+<hr/>
+<div class="row">
+
+  <div class="col-sm-12 col-md-5">
+    <%= render partial: 'financeiro/diario/cpagar' %>
+  </div>
+
+  <div class="col-sm-12 col-md-7">
+    <%= render partial: 'financeiro/diario/creceber' %>
+  </div>
+
+</div>
+<% end %>
+
+<hr/>
+<br/>
+
+<h3>Saldo Total por Dia</h3><br/>
+<%= line_chart @diario.saldos,
+                label: "Saldo",
+                library: {
+                  plotOptions: {
+                    series: {
+                      dataLabels: { enabled: false },
+                      negativeColor: 'red' } } } %>
+
+<%= render 'financeiro/diario/nav' %>
+
+<h4>Receitas e Despesas - Totais do Mês </h4>
+
+<%= render partial: 'financeiro/diario/totais_rd' %>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+    <%= render partial: 'financeiro/diario/despesas' %>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <%= render partial: 'financeiro/diario/receitas' %>
+  </div>
+
+</div>

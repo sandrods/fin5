@@ -1,0 +1,20 @@
+<%= simple_form_for(@conta) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <%= f.input :nome, label: 'Nome' %>
+    </div>
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Conta', class: 'btn btn-primary' %>
+
+    <%= link_to icon(:trash, 'Apagar este Conta'),
+          @conta,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @conta.new_record? %>
+  </div>
+
+<% end %>

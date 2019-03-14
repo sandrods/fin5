@@ -1,0 +1,5 @@
+<div class="well well-row center mb-4 h2">
+  <%= link_to icon(:arrow_left), financeiro_diario_path(mes: @diario.calendar.last_month), class: "mr-3" %>
+  <%= @diario.calendar.month %>
+  <%= link_to icon(:arrow_right), financeiro_diario_path(mes: @diario.calendar.next_month), class: "ml-3" %>
+</div>

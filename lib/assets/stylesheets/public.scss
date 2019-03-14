@@ -1,0 +1,42 @@
+#header_je {
+  background: asset-url('header_bg.jpg') repeat-x center top transparent;
+  min-height: 122px;
+  margin-bottom: 16px;
+
+  .mainLogo {
+    height: 81px;
+    width: 82px;
+  	background: asset-url('logo.png') no-repeat scroll 0 0 transparent;
+    display: block;
+  }
+
+  .container {
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .tituloJE{
+    color: #707173;
+    font-size: 16px;
+    font-weight: 600;
+    left: 96px;
+    position: absolute;
+    top: 32px;
+  }
+
+  .titulo {
+      font-size: 22px;
+      font-weight: 800;
+      left: 96px;
+      position: absolute;
+      top: 49px;
+  }
+
+  .link_header {
+    color: #ddd;
+    position: absolute;
+    top: 75px;
+    right: 25px;
+    font-size: 12px;
+  }
+}

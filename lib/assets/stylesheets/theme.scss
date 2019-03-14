@@ -1,0 +1,40 @@
+html { font-size: 13px; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+}
+
+body.bg {
+  background: asset-url("bg.png") 0 0 repeat;
+  padding-top: 5rem;
+  & > .container {
+      background-color: #fff;
+      padding: 0 20px 40px 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px 0 rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.2);
+      margin-top: 20px;
+      margin-bottom: 40px;
+      position: relative;
+  }
+}
+
+.sha {
+  font-size: 80%;
+  color: #999;
+  position: absolute;
+  bottom: -17px;
+  right: 12px;
+  font-family: monospace;
+}
+
+@import "navbar";
+// @import "public";
+@import "page_header";
+@import "bottom_actions";
+@import "modals";
+@import "bs-misc";
+@import "search";
+@import "card_text";
+@import "select2_styles";
+@import "tabs_contrast";
+// @import "pdf";
