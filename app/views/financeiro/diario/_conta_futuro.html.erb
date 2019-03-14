@@ -1,6 +1,21 @@
 
-      <table class="table table-striped mt-4">
+      <table class="table table-striped my-4">
+        <thead>
+          <tr>
+            <th style="width: 8rem;">Data</th>
+            <th>Descrição</th>
+            <th class="right">Valor</th>
+          </tr>
+        </thead>
         <tbody id="registros_conta_caixa">
+          <tr class="saldo">
+            <td colspan="2">Saldo Inicial</td>
+            <td class="right"> <%= curr conta.saldo_inicial %> </td>
+          </tr>
           <%= render partial: 'registros/registro', collection: conta.registros %>
+          <tr class="saldo">
+            <td colspan="2">Saldo Final</td>
+            <td class="right"> <%= curr conta.saldo_final %> </td>
+          </tr>
         </tbody>
       </table>

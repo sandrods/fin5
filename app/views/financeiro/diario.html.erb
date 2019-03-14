@@ -8,7 +8,7 @@
 
 <%= render 'financeiro/diario/nav' %>
 
-<ul class="nav nav-tabs" id="contas_tabs">
+<ul class="nav nav-tabs contrast" id="contas_tabs">
 <% @diario.contas.each do |c| %>
   <li class="nav-item">
     <%= link_to c.nome, "#conta_#{c.id}", class: 'nav-link' %>
