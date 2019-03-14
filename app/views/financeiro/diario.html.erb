@@ -8,14 +8,24 @@
 
 <%= render 'financeiro/diario/nav' %>
 
-<div class="row">
+<ul class="nav nav-tabs" id="contas_tabs">
+<% @diario.contas.each do |c| %>
+  <li class="nav-item">
+    <%= link_to c.nome, "#conta_#{c.id}", class: 'nav-link' %>
+  </li>
+<% end %>
+</ul>
 
-  <% if @diario.calendar.future? %>
-    <%= render partial: 'financeiro/diario/conta_futuro', collection: @diario.contas, as: :conta %>
-  <% else %>
-    <%= render partial: 'financeiro/diario/conta', collection: @diario.contas %>
+<div class="tab-content" id="contas_tab_contents">
+  <% @diario.contas.each do |c| %>
+    <div class="tab-pane" id="conta_<%= c.id %>">
+      <% if @diario.calendar.future? %>
+        <%= render partial: 'financeiro/diario/conta_futuro', object: c, as: :conta %>
+      <% else %>
+        <%= render partial: 'financeiro/diario/conta', object: c %>
+      <% end %>
+    </div>
   <% end %>
-
 </div>
 
 <div class="well well-row mb-4">

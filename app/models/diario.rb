@@ -78,7 +78,7 @@ class Diario
       @conta = conta
     end
 
-    delegate :nome, to: :@conta
+    delegate :id, :nome, to: :@conta
 
     def registros
       @conta.registros.where(data: @range).order(data: :desc)
