@@ -42,3 +42,18 @@
 .table-scroll thead tr{
   display:block;
 }
+
+tr.saldo {
+  td {
+    background-color: #fffbf0;
+    padding: 0.3rem inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #777;
+  }
+  &:last-child {
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

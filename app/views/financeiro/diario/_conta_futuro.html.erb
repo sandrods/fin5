@@ -9,13 +9,15 @@
         </thead>
         <tbody id="registros_conta_caixa">
           <tr class="saldo">
-            <td colspan="2">Saldo Inicial</td>
-            <td class="right"> <%= curr conta.saldo_inicial %> </td>
+            <td></td>
+            <td>Saldo Final</td>
+            <td class="right"> <%= curr conta.saldo_do_mes %> </td>
           </tr>
           <%= render partial: 'registros/registro', collection: conta.registros %>
           <tr class="saldo">
-            <td colspan="2">Saldo Final</td>
-            <td class="right"> <%= curr conta.saldo_final %> </td>
+            <td></td>
+            <td>Saldo Inicial</td>
+            <td class="right"> <%= curr conta.saldo_inicial %> </td>
           </tr>
         </tbody>
       </table>
