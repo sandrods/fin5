@@ -85,7 +85,7 @@ gem 'awesome_print'
 
 gem 'simple_form'
 gem 'ransack'
-# gem 'delocalize'
+gem 'delocalize'
 
 gem 'select2-rails'
 

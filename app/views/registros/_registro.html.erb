@@ -3,11 +3,18 @@
   <% if registro.transferencia? %>
   <td class="text-muted">
     <%= registro.descricao %>
-    <small class="sub1"><%= icon(:exchange_alt, registro.transferencia&.conta&.nome) %></small>
+    <small class="sub1 d-inline-block ml-3"><%= icon(:exchange_alt, registro.transferencia&.conta&.nome) %></small>
   <% else %>
   <td class="text-muted">
     <%= registro.descricao %>
   <% end %>
   </td>
   <td class='text-right <%= registro.cd %>' ><%= curr(registro.valor_cd) %></td>
+  <td class='check'>
+    <% if registro.pago? %>
+      <span class="text-success"><%= icon(:check_circle_lg) %></span>
+    <% else %>
+      <span class="text-secondary"><%= icon(:minus_circle_lg) %></span>
+    <% end %>
+  </td>
 </tr>

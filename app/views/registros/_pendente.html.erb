@@ -1,6 +1,6 @@
 <tr <%= 'class=warning' if registro.vencido? %>>
   <td class="date"><%= link_to(registro.data, edit_registro_path(registro), data: { behavior: 'load-modal'} )%></td>
   <td><%= registro.descricao %></td>
-  <td><small><%= registro.forma.try :nome %></small></td>
+  <td><small><%= registro.conta&.nome %></small></td>
   <td class='text-right <%= registro.cd %>' ><%= curr(registro.valor_cd) %></td>
 </tr>

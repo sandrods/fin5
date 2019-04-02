@@ -65,6 +65,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    delocalize (1.2.0)
+      rails (>= 2)
     dotenv (2.4.0)
     dotenv-rails (2.4.0)
       dotenv (= 2.4.0)
@@ -123,8 +125,6 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     puma (3.11.2)
-    pundit (1.1.0)
-      activesupport (>= 3.0.0)
     rack (2.0.6)
     rack-proxy (0.6.5)
       rack
@@ -237,6 +237,7 @@ DEPENDENCIES
   byebug
   chartkick
   coffee-rails (~> 4.2)
+  delocalize
   dotenv-rails
   fabrication
   faker
@@ -250,7 +251,6 @@ DEPENDENCIES
   prawn
   pry-rails
   puma (~> 3.11)
-  pundit
   rails (~> 5.2.2)
   rails-erd
   ransack

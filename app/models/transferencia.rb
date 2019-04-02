@@ -22,6 +22,7 @@ class Transferencia
 
     params[:data] = r1.data
     params[:valor] = r1.valor
+    params[:descricao] = r1.descricao
 
     new(params)
 
@@ -58,12 +59,14 @@ class Transferencia
 
     @valor = params[:valor]
     @data = params[:data]
+    @descricao = params[:descricao]
 
     return false unless valid?(:update)
 
     attrs = {
       valor: @valor,
-      data: @data
+      data: @data,
+      descricao: @descricao
     }
 
     Registro.transaction do
