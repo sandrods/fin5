@@ -1,7 +1,7 @@
 class FinanceiroController < ApplicationController
 
   def diario
-    @diario = Diario.new(params[:mes])
+    @diario = Diario.new(params[:mes], params[:conta])
   end
 
   def anual

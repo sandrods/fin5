@@ -1,5 +1,5 @@
 document.addEventListener "turbolinks:load", ->
 
-  $('#contas_tabs a').on 'click', (e) ->
-    e.preventDefault()
-    $(this).tab('show')
+  # $('#contas_tabs a').on 'click', (e) ->
+  #   e.preventDefault()
+  #   $(this).tab('show')

@@ -11,22 +11,14 @@
 <ul class="nav nav-tabs contrast" id="contas_tabs">
 <% @diario.contas.each do |c| %>
   <li class="nav-item">
-    <%= link_to c.nome, "#conta_#{c.id}", class: 'nav-link' %>
+    <%= link_to c.nome,
+                financeiro_diario_path(conta: c.id, mes: params[:mes]),
+                class: "nav-link #{c.id == @diario.conta.id ? 'active' : ''}" %>
   </li>
 <% end %>
 </ul>
 
-<div class="tab-content" id="contas_tab_contents">
-  <% @diario.contas.each do |c| %>
-    <div class="tab-pane" id="conta_<%= c.id %>">
-      <% if @diario.calendar.future? %>
-        <%= render partial: 'financeiro/diario/conta_futuro', object: c, as: :conta %>
-      <% else %>
-        <%= render partial: 'financeiro/diario/conta', object: c %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<%= render partial: 'financeiro/diario/conta', object: @diario.conta %>
 
 <div class="well well-row mb-4">
   <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>

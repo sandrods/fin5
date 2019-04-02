@@ -1,10 +1,11 @@
 class Diario
 
-  attr_accessor :calendar, :contas
+  attr_accessor :calendar, :contas, :conta
 
-  def initialize(data)
+  def initialize(data, conta_id)
     @calendar = Calendar.new(date: data)
     @contas = ::Conta.order(:id).map { |c| Conta.new(c, @calendar.range) }.select { |c| c.registros.present? }
+    @conta = @contas.select { |c| c.id == conta_id.to_i }.first || @contas.first
     @registros = Registro.where(data: @calendar.range)
   end
 
