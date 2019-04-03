@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :registros do
     post :duplicate, on: :member
+    post :pg, on: :member
   end
   resources :transferencias, controller: 'registros/transferencias'
 

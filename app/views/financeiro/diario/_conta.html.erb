@@ -1,5 +1,5 @@
 
-  <div class="card mb-4">
+  <div class="card mb-4" id="card-conta">
     <div class="card-header alert-info">
       <b><%= conta.nome %></b>
     </div>
@@ -8,7 +8,7 @@
     </div>
     <table class="table table-striped m-0">
       <tbody id="registros_conta_caixa">
-        <%= render partial: 'registros/registro', collection: conta.registros %>
+        <%= render partial: 'financeiro/diario/registro', collection: conta.registros.order('data desc, id') %>
       </tbody>
     </table>
     <div class="card-footer text-right">

@@ -1,0 +1,15 @@
+<tr>
+  <td class="date"><%= link_to registro.data, edit_registro_path(registro), data: { behavior: 'load-modal'} %></td>
+  <td class='text-right <%= registro.cd %>'  style="width: 7rem;" ><%= curr(registro.valor_cd) %></td>
+  <td class='check'>
+    <%= RegistroPgComponent.render self, registro %>
+  </td>
+  <td class="text-muted">
+  <% if registro.transferencia? %>
+    <%= registro.descricao %>
+    <small class="sub1 d-inline-block ml-3"><%= icon(:exchange_alt, registro.transferencia&.conta&.nome) %></small>
+  <% else %>
+    <%= registro.descricao %>
+  <% end %>
+  </td>
+</tr>

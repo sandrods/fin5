@@ -74,8 +74,8 @@ class Diario
 
   class Conta
 
-    def initialize(conta, range)
-      @range = range
+    def initialize(conta, range=nil)
+      @range = range || Calendar.new.range
       @conta = conta
     end
 

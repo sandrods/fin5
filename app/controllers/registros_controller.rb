@@ -57,6 +57,15 @@ class RegistrosController < ApplicationController
     redirect_to financeiro_diario_path(mes: new_reg.data)
   end
 
+  def pg
+    @registro = Registro.find params[:id]
+    pg = !@registro.pago
+    @registro.update! pago: pg
+    @registro.transferencia.update!(pago: pg) if @registro.transferencia?
+
+    render partial: "financeiro/diario/conta", object: Diario::Conta.new(@registro.conta)
+  end
+
   private
 
    def registro_params
