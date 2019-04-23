@@ -1,16 +1,20 @@
 class Diario
 
-  attr_accessor :calendar, :contas, :conta
+  attr_accessor :calendar, :conta_id, :conta, :registros
 
   def initialize(data, conta_id)
     @calendar = Calendar.new(date: data)
-    @contas = ::Conta.order(:id).map { |c| Conta.new(c, @calendar.range) }.select { |c| c.registros.present? }
-    @conta = @contas.select { |c| c.id == conta_id.to_i }.first || @contas.first
-    @registros = Registro.where(data: @calendar.range)
+
+    @conta = conta_id.present? ? Conta.find(conta_id) : contas.first
+
+    da_conta = Registro.da_conta(@conta.id)
+
+    @registros  = da_conta.where(data: @calendar.range)
+    @anteriores = da_conta.where("data < ?", @calendar.range.begin)
   end
 
   def a_pagar
-    @registros.a_pagar
+    @anteriores.a_pagar
   end
 
   def a_pagar_total
@@ -18,7 +22,7 @@ class Diario
   end
 
   def a_receber
-    @registros.a_receber
+    @anteriores.a_receber
   end
 
   def a_receber_total
@@ -27,15 +31,20 @@ class Diario
 
   def saldo_inicial
     @saldo_inicial ||= begin
-      ant = Registro.where('data < ?', @calendar.range.begin)
-      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
+      @anteriores.creditos.pagos.sum(:valor) - @anteriores.debitos.pagos.sum(:valor)
     end
   end
 
-  def saldo_final
-    @saldo_final ||= begin
-      ant = Registro.where('data <= ?', @calendar.range.last)
-      ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
+  def saldo
+    @saldo ||= begin
+      r = @conta.registros.where('data <= ?', @calendar.range.last)
+      r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
+    end
+  end
+
+  def saldo_do_mes
+    @saldo_do_mes ||= begin
+      total_receitas - total_despesas
     end
   end
 
@@ -57,50 +66,31 @@ class Diario
   end
 
   def despesas
-    @registros.debitos.efetivos.group(:categoria).sum(:valor)
+    @registros.debitos.group(:categoria).sum(:valor)
   end
 
   def total_despesas
-    @registros.debitos.efetivos.sum(:valor)
+    @registros.debitos.sum(:valor)
   end
 
   def receitas
-    @registros.creditos.efetivos.group(:categoria).sum(:valor)
+    @registros.creditos.group(:categoria).sum(:valor)
   end
 
   def total_receitas
-    @registros.creditos.efetivos.sum(:valor)
+    @registros.creditos.sum(:valor)
   end
 
-  class Conta
-
-    def initialize(conta, range=nil)
-      @range = range || Calendar.new.range
-      @conta = conta
-    end
-
-    delegate :id, :nome, to: :@conta
-
-    def registros
-      @conta.registros.where(data: @range).order(data: :desc)
-    end
-
-    def saldo_inicial
-      r = @conta.registros.where('data < ?', @range.begin)
-      r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
-    end
-
-    def saldo
-      r = @conta.registros.where('data <= ?', @range.last)
-      r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
-    end
-
-    def saldo_do_mes
-      r = @conta.registros.where(data: @range)
-      r.creditos.sum(:valor) - r.debitos.sum(:valor)
-    end
-
+  def saldo_final
+    @saldo_final ||= saldo_do_mes + saldo_inicial
   end
 
+  def contas
+    Registro.select(:conta_id)
+            .where.not(conta_id: nil)
+            .where(data: @calendar.range)
+            .order(:conta_id)
+            .distinct.map { |r| Conta.find r.conta_id }
+  end
 
 end

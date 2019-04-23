@@ -18,7 +18,7 @@
 <% end %>
 </ul>
 
-<%= render partial: 'financeiro/diario/conta', object: @diario.conta %>
+<%= render partial: 'financeiro/diario/conta', object: @diario, as: :diario %>
 
 <div class="well well-row mb-4">
   <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>

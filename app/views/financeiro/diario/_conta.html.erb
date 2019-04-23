@@ -1,17 +1,14 @@
 
   <div class="card mb-4" id="card-conta">
-    <div class="card-header alert-info">
-      <b><%= conta.nome %></b>
-    </div>
     <div class="card-footer upper text-right">
-      <small>Saldo Inicial</small> &nbsp; <%= curr conta.saldo_inicial %>
+      <small>Saldo Inicial</small> &nbsp; <%= curr diario.saldo_inicial %>
     </div>
     <table class="table table-striped m-0">
       <tbody id="registros_conta_caixa">
-        <%= render partial: 'financeiro/diario/registro', collection: conta.registros.order('data desc, id') %>
+        <%= render partial: 'financeiro/diario/registro', collection: diario.registros.por_data %>
       </tbody>
     </table>
     <div class="card-footer text-right">
-      <small>Saldo Final</small> &nbsp; <%= curr conta.saldo_do_mes %>
+      <small>Saldo Final</small> &nbsp; <%= curr diario.saldo_do_mes %>
     </div>
   </div>

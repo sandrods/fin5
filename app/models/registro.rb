@@ -7,7 +7,7 @@ class Registro < ActiveRecord::Base
   scope :creditos, -> { where(cd: 'C') }
   scope :debitos,  -> { where(cd: 'D') }
   scope :efetivos, -> { where(transf_id: nil) }
-  scope :por_data, -> { order(:data) }
+  scope :por_data, -> { order('data desc, id') }
 
   scope :pendentes,  -> { where(pago: false) }
   scope :pagos,      -> { where(pago: true) }
