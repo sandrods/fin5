@@ -90,7 +90,8 @@ class Diario
             .where.not(conta_id: nil)
             .where(data: @calendar.range)
             .order(:conta_id)
-            .distinct.map { |r| Conta.find r.conta_id }
+            .distinct
+            .map { |r| Conta.find r.conta_id }
   end
 
 end

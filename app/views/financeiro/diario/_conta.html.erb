@@ -1,24 +1,22 @@
+<table class="table table-striped mb-4">
+  <tbody id="registros_conta_caixa">
+    
+    <tr class="saldo">
+      <td colspan="2" class="text-right">
+        <small>Saldo do Mês</small> &nbsp; <%= curr diario.saldo_do_mes %>
+      </td>
+      <td colspan="2" class="text-right">
+        <small>Saldo Atual</small> &nbsp; <%= curr diario.saldo %>
+      </td>
+    </tr>
 
-  <div class="card mb-4" id="card-conta">
+    <%= render partial: 'financeiro/diario/registro', collection: diario.registros.por_data %>
 
-    <table class="table table-striped m-0">
-      <tbody id="registros_conta_caixa">
-        <%= render partial: 'financeiro/diario/registro', collection: diario.registros.por_data %>
-        <tr class="saldo">
-          <td colspan="2" class="text-right">
-            <small>Saldo do Mês</small> &nbsp; <%= curr diario.saldo_do_mes %>
-          </td>
-          <td colspan="2" class="text-right">
-            <small>Saldo Atual</small> &nbsp; <%= curr diario.saldo %>
-          </td>
-        </tr>
-        <%= render partial: 'financeiro/diario/registro', collection: diario.registros.por_data %>
-        <tr class="saldo">
-          <td colspan="4" class="text-right">
-            <small>Saldo Inicial</small> &nbsp; <%= curr diario.saldo_inicial %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <tr class="saldo">
+      <td colspan="4" class="text-right">
+        <small>Saldo Inicial</small> &nbsp; <%= curr diario.saldo_inicial %>
+      </td>
+    </tr>
 
-  </div>
+  </tbody>
+</table>
