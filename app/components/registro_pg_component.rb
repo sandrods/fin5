@@ -9,7 +9,7 @@ class RegistroPgComponent
     if @registro.pago?
       span :check_circle_lg, "text-success"
     else
-      span :minus_circle_lg, "text-very-muted"
+      span :minus_circle_lg, "text-danger"
     end
   end
 
