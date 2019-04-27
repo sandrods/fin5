@@ -1,4 +1,4 @@
-class Diario
+class Diario2
 
   attr_accessor :calendar, :contas, :conta
 
