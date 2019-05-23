@@ -3,7 +3,7 @@
     <b>CONTAS A RECEBER</b>
   </div>
   <table class="table table-striped mb-0">
-    <tbody id="registros_conta_caixa">
+    <tbody>
       <%= render partial: 'registros/pendente', collection: @diario.a_receber, as: :registro %>
     </tbody>
   </table>

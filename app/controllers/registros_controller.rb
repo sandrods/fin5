@@ -63,7 +63,7 @@ class RegistrosController < ApplicationController
     @registro.update! pago: pg
     @registro.transferencia.update!(pago: pg) if @registro.transferencia?
 
-    render partial: "financeiro/diario/conta", object: Diario::Conta.new(@registro.conta)
+    render partial: "financeiro/diario/conta", object: Diario.new(session[:mes], session[:conta]), as: :diario
   end
 
   private
