@@ -57,6 +57,7 @@ class Registro < ActiveRecord::Base
 
     reg.data = self.data + 1.month
     reg.pago = false
+    reg.parcela = reg.parcela + 1 if reg.parcela && reg.parcela > 0
 
     reg.tap(&:save!)
   end

@@ -56,6 +56,14 @@ class Calendar
     @date.next_month.strftime('%m/%Y')
   end
 
+  def last_calendar
+    Calendar.new(date: @date.last_month)
+  end
+
+  def next_calendar
+    Calendar.new(date: @date.next_month)
+  end
+
   def range
     ini = @date.beginning_of_month.last_month + 20
     fim = ini.next_month - 1

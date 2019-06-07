@@ -66,6 +66,10 @@ class RegistrosController < ApplicationController
     render partial: "financeiro/diario/conta", object: Diario.new(session[:mes], session[:conta]), as: :diario
   end
 
+  def recorrentes
+
+  end
+
   private
 
    def registro_params
