@@ -104,3 +104,5 @@ gem 'odf-report'
 gem "chartkick"
 gem "highcharts-rails"
 gem 'groupdate'
+
+gem 'font-awesome-sass', '~> 5.8.1'
