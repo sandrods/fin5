@@ -73,9 +73,9 @@
 </div>
 
 <div class="bottom-actions">
-  <%= link_to icon(:retweet, 'Gerar Registros Recorrentes'),
+  <%= link_to icon(:retweet, 'Gerar Registros Recorrentes para Mês Seguinte'),
               recorrentes_registros_path(mes: params[:mes], conta: session[:conta]),
               method: :post,
-              class: 'btn btn-warning',
+              class: 'btn btn-sm btn-warning',
               data: { confirm: "Confirma Geração de Registros" } %>
 </div>

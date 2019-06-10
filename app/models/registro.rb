@@ -6,13 +6,18 @@ class Registro < ActiveRecord::Base
 
   scope :creditos, -> { where(cd: 'C') }
   scope :debitos,  -> { where(cd: 'D') }
-  scope :efetivos, -> { where(transf_id: nil) }
   scope :por_data, -> { order('data desc, id') }
 
   scope :pendentes,  -> { where(pago: false) }
   scope :pagos,      -> { where(pago: true) }
 
   scope :da_conta, ->(conta) { where(conta_id: conta) }
+
+  scope :mensais,  -> { where(recorrencia: 'M') }
+  scope :parcelas, -> { where(recorrencia: 'P') }
+
+  scope :efetivos,       -> { where(transf_id: nil) }
+  scope :transferencias, -> { where.not(transf_id: nil) }
 
   belongs_to :conta, optional: true
   belongs_to :categoria, optional: true
