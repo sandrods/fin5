@@ -67,14 +67,22 @@ class RegistrosController < ApplicationController
   end
 
   def recorrentes
+    service = GerarRecorrentes.run(mes: params[:mes], conta: params[:conta])
 
+    if service.success?
+      flash[:notice] = "Registros recorrentes gerados com sucesso"
+    else
+      flash[:error] = service.error_messages
+    end
+
+    redirect_to financeiro_diario_path(mes: params[:mes], conta: params[:conta])
   end
 
   private
 
    def registro_params
      params.require(:registro)
-           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id, :colecao_id)
+           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id, :colecao_id, :recorrencia, :parcela, :parcelas)
            .delocalize(data: :date, valor: :number)
    end
 

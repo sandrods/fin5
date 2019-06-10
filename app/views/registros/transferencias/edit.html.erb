@@ -36,6 +36,22 @@
 
     </div>
 
+    <div class="well vertical card-text mb-3">
+      <div class="form-row">
+        <div class="col-md-6">
+          <%= f.input :recorrencia,
+                      label: "Recorrência",
+                      collection: [%w(Única U), %w(Mensal M), %w(Parcelas P)] %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcela %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcelas %>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="modal-footer">

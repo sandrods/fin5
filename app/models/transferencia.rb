@@ -1,6 +1,18 @@
 class Transferencia
   include ActiveModel::Model
-  attr_accessor :conta_origem, :conta_destino, :data, :valor, :reg_origem, :reg_destino, :descricao
+
+  attr_accessor *%i(
+    conta_origem
+    conta_destino
+    data
+    valor
+    reg_origem
+    reg_destino
+    descricao
+    recorrencia
+    parcela
+    parcelas
+  )
 
   validates :conta_origem, :conta_destino, :data, :valor, presence: true, on: :create
   validates :data, :valor, presence: true, on: :update
@@ -23,6 +35,9 @@ class Transferencia
     params[:data] = r1.data
     params[:valor] = r1.valor
     params[:descricao] = r1.descricao
+    params[:recorrencia] = r1.recorrencia
+    params[:parcela] = r1.parcela
+    params[:parcelas] = r1.parcelas
 
     new(params)
 
@@ -40,14 +55,20 @@ class Transferencia
                                     descricao: @descricao,
                                     valor: @valor,
                                     cd: "D",
-                                    pago: true
+                                    pago: true,
+                                    recorrencia: @recorrencia,
+                                    parcela: @parcela,
+                                    parcelas: @parcelas
 
       d = destino.registros.create! data: @data,
                                     descricao: @descricao,
                                     valor: @valor,
                                     cd: "C",
                                     transf_id: o.id,
-                                    pago: true
+                                    pago: true,
+                                    recorrencia: @recorrencia,
+                                    parcela: @parcela,
+                                    parcelas: @parcelas
 
       o.update_columns transf_id: d.id
 
@@ -60,13 +81,19 @@ class Transferencia
     @valor = params[:valor]
     @data = params[:data]
     @descricao = params[:descricao]
+    @recorrencia = params[:recorrencia]
+    @parcela = params[:parcela]
+    @parcelas = params[:parcelas]
 
     return false unless valid?(:update)
 
     attrs = {
       valor: @valor,
       data: @data,
-      descricao: @descricao
+      descricao: @descricao,
+      recorrencia: @recorrencia,
+      parcela: @parcela,
+      parcelas: @parcelas
     }
 
     Registro.transaction do
