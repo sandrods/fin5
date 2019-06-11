@@ -71,6 +71,24 @@ class Registro < ActiveRecord::Base
     data.beginning_of_month
   end
 
+  def recorrente?
+    mensal? || parcela?
+  end
+
+  def mensal?
+    recorrencia == 'M'
+  end
+
+  def parcela?
+    recorrencia == 'P'
+  end
+
+  def txt_parcela
+    return unless parcela?
+
+    "(#{parcela.to_s.rjust(2, '0')}/#{parcelas.to_s.rjust(2, '0')})"
+  end
+
 private
 
   def registrar_pagamento

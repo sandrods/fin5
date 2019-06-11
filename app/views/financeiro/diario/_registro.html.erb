@@ -7,10 +7,26 @@
     <%= registro_pg(registro) %>
   </td>
   <td class="text-muted">
+
+
+
+    <% if registro.parcela? %>
+      <span class="text-dark d-inline-block mr-1">
+        <%= icon(:retweet, registro.txt_parcela) %>
+      </span>
+    <% end %>
+
+    <% if registro.mensal? %>
+    <span class="text-dark d-inline-block mr-1">
+      <%= icon(:retweet) %>
+    </span>
+    <% end %>
+
     <%= registro.descricao %>
+
     <% if registro.transferencia? %>
       <small class="sub1 d-inline-block ml-3">
-        <%= icon(:exchange_alt, registro.transferencia&.conta&.nome) %>
+        <%= icon(:exchange_alt_lg, registro.transferencia&.conta&.nome) %>
       </small>
     <% end %>
   </td>
