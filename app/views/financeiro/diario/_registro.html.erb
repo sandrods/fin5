@@ -8,8 +8,6 @@
   </td>
   <td class="text-muted">
 
-
-
     <% if registro.parcela? %>
       <span class="text-dark d-inline-block mr-1">
         <%= icon(:retweet, registro.txt_parcela) %>
@@ -17,9 +15,9 @@
     <% end %>
 
     <% if registro.mensal? %>
-    <span class="text-dark d-inline-block mr-1">
-      <%= icon(:retweet) %>
-    </span>
+      <span class="text-dark d-inline-block mr-1">
+        <%= icon(:retweet) %>
+      </span>
     <% end %>
 
     <%= registro.descricao %>
@@ -29,5 +27,6 @@
         <%= icon(:exchange_alt_lg, registro.transferencia&.conta&.nome) %>
       </small>
     <% end %>
+
   </td>
 </tr>

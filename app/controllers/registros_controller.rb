@@ -71,11 +71,13 @@ class RegistrosController < ApplicationController
 
     if service.success?
       flash[:notice] = "Registros recorrentes gerados com sucesso"
+      month = Calendar.new(date: params[:mes]).next_month
     else
       flash[:error] = service.error_messages
+      month = params[:mes]
     end
 
-    redirect_to financeiro_diario_path(mes: params[:mes], conta: params[:conta])
+    redirect_to financeiro_diario_path(mes: month, conta: params[:conta])
   end
 
   private
