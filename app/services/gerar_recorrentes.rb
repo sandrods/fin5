@@ -55,20 +55,7 @@ class GerarRecorrentes
   def duplicar_transferencias_mensais
 
     @registros.transferencias.debitos.mensais.each do |reg|
-
-      new_D = reg.dup
-      new_C = reg.transferencia.dup
-
-      new_D.data = reg.data.next_month
-      new_D.pago = false
-      new_D.parent_id = reg.parent_id || reg.id
-
-      new_C.data = reg.data.next_month
-      new_C.pago = false
-      new_C.parent_id = reg.parent_id || reg.id
-
-      new_D.save!
-      new_C.save!
+      Transferencia.find(reg.id).duplicate
     end
 
   end
@@ -76,23 +63,7 @@ class GerarRecorrentes
   def duplicar_transferencias_parcelas
 
     @registros.transferencias.debitos.parcelas.each do |reg|
-      next unless reg.parcela < reg.parcelas
-
-      new_D = reg.dup
-      new_C = reg.transferencia.dup
-
-      new_D.data = reg.data.next_month
-      new_D.pago = false
-      new_D.parent_id = reg.parent_id || reg.id
-      new_D.parcela = reg.parcela + 1
-
-      new_C.data = reg.data.next_month
-      new_C.pago = false
-      new_C.parent_id = reg.parent_id || reg.id
-      new_C.parcela = reg.parcela + 1
-
-      new_D.save!
-      new_C.save!
+      Transferencia.find(reg.id).duplicate
     end
 
   end

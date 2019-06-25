@@ -6,16 +6,16 @@ class Transferencia
     conta_destino
     data
     valor
-    reg_origem
-    reg_destino
+    origem
+    destino
     descricao
     recorrencia
     parcela
     parcelas
+    parent_id
   )
 
-  validates :conta_origem, :conta_destino, :data, :valor, presence: true, on: :create
-  validates :data, :valor, presence: true, on: :update
+  validates :conta_origem, :conta_destino, :data, :valor, presence: true
 
   def self.find(id)
 
@@ -25,26 +25,30 @@ class Transferencia
     params = {}
 
     if r1.despesa?
-      params[:reg_origem] = r1
-      params[:reg_destino] = r2
+      params[:origem] = r1
+      params[:destino] = r2
     else
-      params[:reg_origem] = r2
-      params[:reg_destino] = r1
+      params[:origem] = r2
+      params[:destino] = r1
     end
 
-    params[:data] = r1.data
-    params[:valor] = r1.valor
-    params[:descricao] = r1.descricao
+    params[:conta_origem]  = params[:origem].conta_id
+    params[:conta_destino] = params[:destino].conta_id
+
+    params[:data]        = r1.data
+    params[:valor]       = r1.valor
+    params[:descricao]   = r1.descricao
     params[:recorrencia] = r1.recorrencia
-    params[:parcela] = r1.parcela
-    params[:parcelas] = r1.parcelas
+    params[:parcela]     = r1.parcela
+    params[:parcelas]    = r1.parcelas
+    params[:parent_id]   = r1.parent_id
 
     new(params)
 
   end
 
   def create
-    return false unless valid?(:create)
+    return false unless valid?
 
     origem = Conta.find @conta_origem
     destino = Conta.find @conta_destino
@@ -55,7 +59,7 @@ class Transferencia
                                     descricao: @descricao,
                                     valor: @valor,
                                     cd: "D",
-                                    pago: true,
+                                    pago: false,
                                     recorrencia: @recorrencia,
                                     parcela: @parcela,
                                     parcelas: @parcelas
@@ -65,7 +69,7 @@ class Transferencia
                                     valor: @valor,
                                     cd: "C",
                                     transf_id: o.id,
-                                    pago: true,
+                                    pago: false,
                                     recorrencia: @recorrencia,
                                     parcela: @parcela,
                                     parcelas: @parcelas
@@ -78,14 +82,16 @@ class Transferencia
 
   def update params
 
-    @valor = params[:valor]
-    @data = params[:data]
-    @descricao = params[:descricao]
-    @recorrencia = params[:recorrencia]
-    @parcela = params[:parcela]
-    @parcelas = params[:parcelas]
+    @valor         = params[:valor]
+    @data          = params[:data]
+    @descricao     = params[:descricao]
+    @recorrencia   = params[:recorrencia]
+    @parcela       = params[:parcela]
+    @parcelas      = params[:parcelas]
+    @conta_origem  = params[:conta_origem]
+    @conta_destino = params[:conta_destino]
 
-    return false unless valid?(:update)
+    return false unless valid?
 
     attrs = {
       valor: @valor,
@@ -97,8 +103,8 @@ class Transferencia
     }
 
     Registro.transaction do
-      @reg_origem.update! attrs
-      @reg_destino.update! attrs
+      @origem.update!  attrs.merge(conta_id: @conta_origem)
+      @destino.update! attrs.merge(conta_id: @conta_destino)
     end
 
   end
@@ -106,18 +112,37 @@ class Transferencia
   def destroy
 
     Registro.transaction do
-      @reg_origem.destroy!
-      @reg_destino.destroy!
+      @origem.destroy!
+      @destino.destroy!
     end
 
   end
 
+  def duplicate
+    return if @origem.parcela? && @parcela == @parcelas
+
+    attrs = {
+      conta_origem:  @origem.conta_id,
+      conta_destino: @destino.conta_id,
+      valor:         @valor,
+      data:          @data.next_month,
+      descricao:     @descricao,
+      recorrencia:   @recorrencia,
+      parcela:       @origem.parcela? ? @parcela + 1 : nil,
+      parcelas:      @parcelas,
+      parent_id:     @origem.recorrente? ? @origem.parent_id || @origem.id : nil
+    }
+
+    Transferencia.new(attrs).create
+
+  end
+
   def to_param
-    persisted? ? @reg_origem.id.to_s : nil
+    persisted? ? @origem.id.to_s : nil
   end
 
   def persisted?
-    @reg_origem.present?
+    @origem.present?
   end
 
 end
