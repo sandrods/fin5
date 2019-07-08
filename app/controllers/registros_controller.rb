@@ -6,7 +6,7 @@ class RegistrosController < ApplicationController
   end
 
   def new
-    @registro = Registro.new(cd: params[:cd])
+    @registro = Registro.new(cd: params[:cd], conta_id: params[:conta_id])
     render layout: false
   end
 

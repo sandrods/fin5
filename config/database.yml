@@ -71,7 +71,7 @@ development:
 
 # postgresql://localhost/fin5
 production:
-  url:  <%= ENV["DATABASE_URL"] %>
-  # url: postgresql://localhost/fin5
+  # url:  <%= ENV["DATABASE_URL"] %>
+  url: postgresql://localhost/fin5
   pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
   encoding: unicode

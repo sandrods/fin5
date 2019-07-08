@@ -2,7 +2,7 @@ class Registro < ActiveRecord::Base
 
   before_create :registrar_pagamento
 
-  validates_presence_of :data, :descricao, :valor, :cd
+  validates_presence_of :data, :descricao, :valor, :cd, :conta_id
 
   scope :creditos, -> { where(cd: 'C') }
   scope :debitos,  -> { where(cd: 'D') }

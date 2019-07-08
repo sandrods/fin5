@@ -1,8 +1,8 @@
 <%= page_header "Diário Financeiro" do %>
 
-  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:exchange_alt, "Transferência"), new_transferencia_path(origem: @diario.conta.id), class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, "Crédito"), new_registro_path(cd: 'C', conta_id: @diario.conta.id), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:minus, "Débito"), new_registro_path(cd: 'D', conta_id: @diario.conta.id), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
 
 <% end %>
 
@@ -21,10 +21,10 @@
 <%= render partial: 'financeiro/diario/conta', object: @diario, as: :diario %>
 
 <div class="well well-row mb-4">
-  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D', conta_id: @diario.conta.id), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C', conta_id: @diario.conta.id), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
 
-  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path(origem: @diario.conta.id), class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
 </div>
 
 <% unless @diario.calendar.future? %>

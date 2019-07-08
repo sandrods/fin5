@@ -1,7 +1,7 @@
 class Registros::TransferenciasController < ApplicationController
 
   def new
-    @transf = Transferencia.new
+    @transf = Transferencia.new(conta_origem: params[:origem])
     render layout: false
   end
 
