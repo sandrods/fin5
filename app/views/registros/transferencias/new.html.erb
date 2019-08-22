@@ -10,24 +10,48 @@
 
       <div class="row">
         <div class="col-md-6">
-          <%= f.input :conta_origem, collection: Conta.to_select, label: 'Conta Origem' %>
+           <label>
+             Conta Origem
+             <span class="badge badge-danger">DÉBITO</span>
+           </label>
+           <%= f.input :conta_origem, collection: Conta.to_select, label: false %>
         </div>
         <div class="col-md-6">
-          <%= f.input :conta_destino, collection: Conta.to_select, label: 'Conta Destino' %>
+          <label>
+            Conta Destino
+            <span class="badge badge-success">CRÉDITO</span>
+          </label>
+          <%= f.input :conta_destino, collection: Conta.to_select, label: false %>
         </div>
       </div>
 
-      <%= f.input :descricao %>
+      <%= f.input :descricao, label: "Descrição" %>
 
       <div class="row">
         <div class="col-md-6">
           <%= f.input :data, as: :datetime %>
         </div>
         <div class="col-md-6">
-          <%= f.input :valor, as: :currency %>
+          <%= f.input :valor, as: :currency, input_html: { value: curr(@transf.valor) } %>
         </div>
       </div>
 
+    </div>
+
+    <div class="well vertical card-text mb-3">
+      <div class="form-row">
+        <div class="col-md-6">
+          <%= f.input :recorrencia,
+                      label: "Recorrência",
+                      collection: [%w(Mensal M), %w(Parcelas P)] %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcela %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcelas %>
+        </div>
+      </div>
     </div>
 
   </div>

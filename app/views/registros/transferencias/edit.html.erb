@@ -14,14 +14,14 @@
              Conta Origem
              <span class="badge badge-danger">DÉBITO</span>
            </label>
-           <%= f.input :conta_origem, collection: Conta.to_select, label: 'Conta Origem' %>
+           <%= f.input :conta_origem, collection: Conta.to_select, label: false %>
         </div>
         <div class="col-md-6">
           <label>
             Conta Destino
             <span class="badge badge-success">CRÉDITO</span>
           </label>
-          <%= f.input :conta_destino, collection: Conta.to_select, label: 'Conta Destino' %>
+          <%= f.input :conta_destino, collection: Conta.to_select, label: false %>
         </div>
       </div>
 
