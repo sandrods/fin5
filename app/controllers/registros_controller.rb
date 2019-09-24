@@ -46,6 +46,10 @@ class RegistrosController < ApplicationController
 
     @registro.destroy!
 
+    if @registro.parent.present?
+      @registro.parent.update_column :next_id, nil
+    end
+
     redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
@@ -67,7 +71,7 @@ class RegistrosController < ApplicationController
   end
 
   def recorrentes
-    service = GerarRecorrentes.run(mes: params[:mes], conta: params[:conta])
+    service = GerarRecorrentes.run(mes: params[:mes])
 
     if service.success?
       flash[:notice] = "Registros recorrentes gerados com sucesso"
@@ -77,7 +81,7 @@ class RegistrosController < ApplicationController
       month = params[:mes]
     end
 
-    redirect_to financeiro_diario_path(mes: month, conta: params[:conta])
+    redirect_to financeiro_diario_path(mes: month)
   end
 
   private

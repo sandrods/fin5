@@ -12,7 +12,7 @@ class Transferencia
     recorrencia
     parcela
     parcelas
-    parent_id
+    parent
   )
 
   validates :conta_origem, :conta_destino, :data, :valor, presence: true
@@ -41,7 +41,6 @@ class Transferencia
     params[:recorrencia] = r1.recorrencia
     params[:parcela]     = r1.parcela
     params[:parcelas]    = r1.parcelas
-    params[:parent_id]   = r1.parent_id
 
     new(params)
 
@@ -50,33 +49,39 @@ class Transferencia
   def create
     return false unless valid?
 
-    origem = Conta.find @conta_origem
-    destino = Conta.find @conta_destino
+    cta_origem = Conta.find @conta_origem
+    cta_destino = Conta.find @conta_destino
 
     Conta.transaction do
 
-      o = origem.registros.create!  data: @data,
-                                    descricao: @descricao,
-                                    valor: @valor,
-                                    cd: "D",
-                                    pago: false,
-                                    recorrencia: @recorrencia,
-                                    parcela: @parcela,
-                                    parcelas: @parcelas
+      @origem = cta_origem
+                  .registros
+                  .create!  data: @data,
+                            descricao: @descricao,
+                            valor: @valor,
+                            cd: "D",
+                            pago: false,
+                            recorrencia: @recorrencia,
+                            parcela: @parcela,
+                            parcelas: @parcelas
 
-      d = destino.registros.create! data: @data,
-                                    descricao: @descricao,
-                                    valor: @valor,
-                                    cd: "C",
-                                    transf_id: o.id,
-                                    pago: false,
-                                    recorrencia: @recorrencia,
-                                    parcela: @parcela,
-                                    parcelas: @parcelas
+      @destino = cta_destino
+                   .registros
+                   .create! data: @data,
+                            descricao: @descricao,
+                            valor: @valor,
+                            cd: "C",
+                            transf_id: @origem.id,
+                            pago: false,
+                            recorrencia: @recorrencia,
+                            parcela: @parcela,
+                            parcelas: @parcelas
 
-      o.update_columns transf_id: d.id
+      @origem.update_columns transf_id: @destino.id
 
     end
+
+    self
 
   end
 
@@ -129,11 +134,15 @@ class Transferencia
       descricao:     @descricao,
       recorrencia:   @recorrencia,
       parcela:       @origem.parcela? ? @parcela + 1 : nil,
-      parcelas:      @parcelas,
-      parent_id:     @origem.recorrente? ? @origem.parent_id || @origem.id : nil
+      parcelas:      @parcelas
     }
 
-    Transferencia.new(attrs).create
+    if new_transf = Transferencia.new(attrs).create
+      @origem.update_columns next_id: new_transf.origem.id
+      @destino.update_columns next_id: new_transf.destino.id
+    end
+
+    new_transf
 
   end
 

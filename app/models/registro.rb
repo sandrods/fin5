@@ -19,11 +19,16 @@ class Registro < ActiveRecord::Base
   scope :efetivos,       -> { where(transf_id: nil) }
   scope :transferencias, -> { where.not(transf_id: nil) }
 
+  scope :no_next, -> { where(next_id: nil) }
+
   belongs_to :conta, optional: true
   belongs_to :categoria, optional: true
   belongs_to :forma, optional: true
 
   belongs_to :transferencia, class_name: "Registro", foreign_key: 'transf_id', optional: true
+
+  belongs_to :next, class_name: "Registro", foreign_key: 'next_id', optional: true
+  has_one :parent, class_name: "Registro", foreign_key: 'next_id', inverse_of: :next
 
   def pendente?
     !pago
