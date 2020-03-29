@@ -31,6 +31,7 @@
     background-color: #fffbf0;
     &.upper {
       border-bottom: 1px solid #ddd;
+      border-top: none;
     }
   }
 }
@@ -41,4 +42,28 @@
 }
 .table-scroll thead tr{
   display:block;
+}
+
+tr.saldo {
+  td {
+    background-color: #fffbf0;
+    padding: 0.3rem inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #777;
+  }
+  &:last-child {
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}
+
+td.date {
+  width: 8rem;
+}
+
+td.check {
+  text-align: right;
+  width: 3rem;
 }

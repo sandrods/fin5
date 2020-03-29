@@ -1,7 +1,7 @@
 class Registros::TransferenciasController < ApplicationController
 
   def new
-    @transf = Transferencia.new
+    @transf = Transferencia.new(conta_origem: params[:origem])
     render layout: false
   end
 
@@ -44,7 +44,7 @@ class Registros::TransferenciasController < ApplicationController
 
   def transf_params
     params.require(:transferencia)
-          .permit(:data, :valor, :conta_origem, :conta_destino, :descricao)
+          .permit(:data, :valor, :conta_origem, :conta_destino, :descricao, :recorrencia, :parcela, :parcelas)
           .delocalize(data: :date, valor: :number)
   end
 

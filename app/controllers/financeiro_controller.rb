@@ -1,7 +1,10 @@
 class FinanceiroController < ApplicationController
 
   def diario
-    @diario = Diario.new(params[:mes])
+    session[:mes] = params[:mes] if params[:mes]
+    session[:conta] = params[:conta] if params[:conta]
+
+    @diario = Diario.new(session[:mes], session[:conta])
   end
 
   def anual

@@ -6,7 +6,7 @@ class RegistrosController < ApplicationController
   end
 
   def new
-    @registro = Registro.new(cd: params[:cd])
+    @registro = Registro.new(cd: params[:cd], conta_id: params[:conta_id])
     render layout: false
   end
 
@@ -46,6 +46,10 @@ class RegistrosController < ApplicationController
 
     @registro.destroy!
 
+    if @registro.parent.present?
+      @registro.parent.update_column :next_id, nil
+    end
+
     redirect_to financeiro_diario_path(mes: @registro.data)
   end
 
@@ -57,11 +61,34 @@ class RegistrosController < ApplicationController
     redirect_to financeiro_diario_path(mes: new_reg.data)
   end
 
+  def pg
+    @registro = Registro.find params[:id]
+    pg = !@registro.pago
+    @registro.update! pago: pg
+    @registro.transferencia.update!(pago: pg) if @registro.transferencia?
+
+    render partial: "financeiro/diario/conta", object: Diario.new(session[:mes], session[:conta]), as: :diario
+  end
+
+  def recorrentes
+    service = GerarRecorrentes.run(mes: params[:mes])
+
+    if service.success?
+      flash[:notice] = "Registros recorrentes gerados com sucesso"
+      month = Calendar.new(date: params[:mes]).next_month
+    else
+      flash[:error] = service.error_messages
+      month = params[:mes]
+    end
+
+    redirect_to financeiro_diario_path(mes: month)
+  end
+
   private
 
    def registro_params
      params.require(:registro)
-           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id, :colecao_id)
+           .permit(:data, :valor, :conta_id, :forma_id, :descricao, :pago, :cd, :categoria_id, :colecao_id, :recorrencia, :parcela, :parcelas)
            .delocalize(data: :date, valor: :number)
    end
 

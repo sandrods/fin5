@@ -27,6 +27,9 @@ $blue: #337ab7;
 $theme-color: #8eb96c;
 @import "theme";
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 td.C { color: theme-color("success"); }
 td.D { color: theme-color("danger"); }
 

@@ -8,44 +8,57 @@
 <%= simple_form_for @registro, remote: false do |f| %>
   <div class="modal-body">
 
-    <div class="well vertical card-text mb-3">
+    <div class="form-row">
+      <div class="col-md-8">
+        <div class="well vertical card-text">
 
-      <%= f.input :descricao, label: 'Descrição' %>
+          <%= f.input :descricao, label: 'Descrição' %>
 
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.input :data %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :valor, as: :currency, input_html: { value: curr(@registro.valor) } %>
+          <div class="form-row">
+            <div class="col-md-6">
+              <%= f.input :data %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :valor, as: :currency, input_html: { value: curr(@registro.valor) } %>
+            </div>
+          </div>
+
         </div>
       </div>
-
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-md-6">
-        <%= f.input :cd, as: :cd, label: false, input_html: { checked: @registro.receita? } %>
-      </div>
-    </div>
-
-    <div class="well vertical card-text mb-3">
-
-      <div class="row">
-        <div class="col-md-6">
+      <div class="col-md-4">
+        <div class="well card-text">
           <%= f.association :conta, label_method: :nome %>
-        </div>
-        <div class="col-md-6">
           <%= f.association :categoria, collection: Categoria.por_cd(@registro.cd).to_select %>
         </div>
       </div>
-
     </div>
 
-    <div class="row mt-3">
-      <div class="col-md-6">
+    <hr>
+
+    <div class="form-row my-3">
+      <div class="col-md-8">
+        <div class="well vertical card-text">
+          <div class="form-row">
+            <div class="col-md-6">
+              <%= f.input :recorrencia,
+                          label: "Recorrência",
+                          collection: [%w(Mensal M), %w(Parcelas P)] %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :parcela %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :parcelas %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :cd, as: :cd, label: false, input_html: { checked: @registro.receita? } %>
         <%= f.input :pago, as: :pago, label: false %>
       </div>
+
     </div>
 
   </div>

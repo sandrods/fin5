@@ -1,20 +1,23 @@
-<div class="col-sm-12 col-md-6">
-  <div class="card mb-4">
-    <div class="card-header alert-danger">
-      <b><%= conta.nome %></b>
-    </div>
-    <div class="card-footer upper text-right">
-      <small>Saldo Atual</small> &nbsp; <%= curr conta.saldo %>
-    </div>
-    <div class="scroll">
-      <table class="table table-striped m-0 table-sm">
-        <tbody id="registros_conta_caixa">
+
+      <table class="table table-striped my-4">
+        <thead>
+          <tr>
+            <th style="width: 8rem;">Data</th>
+            <th>Descrição</th>
+            <th class="right">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="saldo">
+            <td></td>
+            <td>Saldo Final</td>
+            <td class="right"> <%= curr conta.saldo_do_mes %> </td>
+          </tr>
           <%= render partial: 'registros/registro', collection: conta.registros %>
+          <tr class="saldo">
+            <td></td>
+            <td>Saldo Inicial</td>
+            <td class="right"> <%= curr conta.saldo_inicial %> </td>
+          </tr>
         </tbody>
       </table>
-    </div>
-    <div class="card-footer text-right">
-      <small>Total do Mês</small> &nbsp; <%= curr conta.saldo_do_mes %>
-    </div>
-  </div>
-</div>

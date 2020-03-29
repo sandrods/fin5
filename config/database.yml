@@ -24,9 +24,7 @@ default: &default
 
 development:
   <<: *default
-  username: postgres
-  password: teste1
-  database: <%= ENV.fetch('DB') { 'fin_development' } %>
+  url:  postgresql://postgres:teste1@localhost/fin_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -73,7 +71,7 @@ development:
 
 # postgresql://localhost/fin5
 production:
-  url:  <%= ENV["DATABASE_URL"] %>
-  # url: postgresql://localhost/fin5
+  # url:  <%= ENV["DATABASE_URL"] %>
+  url: postgresql://localhost/fin5
   pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
   encoding: unicode

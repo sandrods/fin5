@@ -1,39 +1,41 @@
 <%= page_header "Diário Financeiro" do %>
 
-  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:exchange_alt, "Transferência"), new_transferencia_path(origem: @diario.conta.id), class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, "Crédito"), new_registro_path(cd: 'C', conta_id: @diario.conta.id), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:minus, "Débito"), new_registro_path(cd: 'D', conta_id: @diario.conta.id), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
 
 <% end %>
 
 <%= render 'financeiro/diario/nav' %>
 
-<div class="row">
+<ul class="nav nav-tabs contrast" id="contas_tabs">
+<% @diario.contas.each do |c| %>
+  <li class="nav-item">
+    <%= link_to c.nome,
+                financeiro_diario_path(conta: c.id, mes: params[:mes]),
+                class: "nav-link #{c.id == @diario.conta.id ? 'active' : ''}" %>
+  </li>
+<% end %>
+</ul>
 
-  <% if @diario.calendar.future? %>
-    <%= render partial: 'financeiro/diario/conta_futuro', collection: @diario.contas, as: :conta %>
-  <% else %>
-    <%= render partial: 'financeiro/diario/conta', collection: @diario.contas %>
-  <% end %>
-
-</div>
+<%= render partial: 'financeiro/diario/conta', object: @diario, as: :diario %>
 
 <div class="well well-row mb-4">
-  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
-  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:minus, 'Débito'), new_registro_path(cd: 'D', conta_id: @diario.conta.id), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:plus, 'Crédito'), new_registro_path(cd: 'C', conta_id: @diario.conta.id), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
 
-  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
+  <%= link_to icon(:exchange_alt, 'Transferência'), new_transferencia_path(origem: @diario.conta.id), class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
 </div>
 
 <% unless @diario.calendar.future? %>
 <hr/>
 <div class="row">
 
-  <div class="col-sm-12 col-md-5">
+  <div class="col-sm-12 col-md-7">
     <%= render partial: 'financeiro/diario/cpagar' %>
   </div>
 
-  <div class="col-sm-12 col-md-7">
+  <div class="col-sm-12 col-md-5">
     <%= render partial: 'financeiro/diario/creceber' %>
   </div>
 
@@ -68,4 +70,12 @@
     <%= render partial: 'financeiro/diario/receitas' %>
   </div>
 
+</div>
+
+<div class="bottom-actions">
+  <%= link_to icon(:retweet, 'Gerar Registros Recorrentes para Mês Seguinte'),
+              recorrentes_registros_path(mes: params[:mes]),
+              method: :post,
+              class: 'btn btn-sm btn-warning',
+              data: { confirm: "Confirma Geração de Registros" } %>
 </div>

@@ -10,20 +10,22 @@
 
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group">
-            <label>Conta Origem</label>
-            <p class="form-control-static"> <%= @transf.reg_origem.conta.nome %> </p>
-          </div>
+           <label>
+             Conta Origem
+             <span class="badge badge-danger">DÉBITO</span>
+           </label>
+           <%= f.input :conta_origem, collection: Conta.to_select, label: false %>
         </div>
         <div class="col-md-6">
-          <div class="form-group">
-            <label>Conta Destino</label>
-            <p class="form-control-static"> <%= @transf.reg_destino.conta.nome %> </p>
-          </div>
+          <label>
+            Conta Destino
+            <span class="badge badge-success">CRÉDITO</span>
+          </label>
+          <%= f.input :conta_destino, collection: Conta.to_select, label: false %>
         </div>
       </div>
 
-      <%= f.input :descricao %>
+      <%= f.input :descricao, label: "Descrição" %>
 
       <div class="row">
         <div class="col-md-6">
@@ -34,6 +36,22 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="well vertical card-text mb-3">
+      <div class="form-row">
+        <div class="col-md-6">
+          <%= f.input :recorrencia,
+                      label: "Recorrência",
+                      collection: [%w(Mensal M), %w(Parcelas P)] %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcela %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :parcelas %>
+        </div>
+      </div>
     </div>
 
   </div>

@@ -85,7 +85,7 @@ gem 'awesome_print'
 
 gem 'simple_form'
 gem 'ransack'
-# gem 'delocalize'
+gem 'delocalize'
 
 gem 'select2-rails'
 
@@ -104,6 +104,9 @@ gem 'odf-report'
 gem "chartkick"
 gem "highcharts-rails"
 gem 'groupdate'
+
+gem 'font-awesome-sass', '~> 5.8.1'
+gem 'rb-readline'
 
 # gem install pg -- --with-pg-config=/usr/local/Cellar/libpq/12.2/bin/pg_config
 # bundle config build.pg --with-pg-config=/usr/local/Cellar/libpq/12.2/bin/pg_config
