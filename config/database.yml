@@ -24,6 +24,8 @@ default: &default
 
 development:
   <<: *default
+  username: postgres
+  password: teste1
   database: <%= ENV.fetch('DB') { 'fin_development' } %>
 
   # The specified database role being used to connect to postgres.

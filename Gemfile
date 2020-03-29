@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.4'
 
 gem 'webpacker', '~> 3.5.0'
 
@@ -104,3 +104,6 @@ gem 'odf-report'
 gem "chartkick"
 gem "highcharts-rails"
 gem 'groupdate'
+
+# gem install pg -- --with-pg-config=/usr/local/Cellar/libpq/12.2/bin/pg_config
+# bundle config build.pg --with-pg-config=/usr/local/Cellar/libpq/12.2/bin/pg_config
