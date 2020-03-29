@@ -5,7 +5,7 @@ class Diario
   def initialize(data, conta_id)
     @calendar = Calendar.new(date: data)
 
-    @conta = conta_id.present? ? Conta.find(conta_id) : contas.first
+    @conta = conta_id.present? ? Conta.find(conta_id) : contas.first || Conta.first
 
     da_conta = Registro.da_conta(@conta.id)
 
